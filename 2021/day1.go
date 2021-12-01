@@ -9,29 +9,62 @@ import (
 	"strconv"
 )
 
-func Day1() {
-	file, err := os.Open("./2021/input/day1.txt")
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer file.Close()
+type SonarSweep struct {
+	Input string
+}
+
+func parseMesurements(file *os.File) []int {
+	var sonarMesurements []int
 
 	scanner := bufio.NewScanner(file)
-
-	var sonarMesurement []int
 
 	for scanner.Scan() {
 		mesurement, err := strconv.Atoi(scanner.Text())
 		if err != nil {
 			log.Fatal(err)
 		} else {
-			sonarMesurement = append(sonarMesurement, mesurement)
+			sonarMesurements = append(sonarMesurements, mesurement)
 		}
 	}
 
 	if err := scanner.Err(); err != nil {
 		log.Fatal(err)
 	}
+
+	return sonarMesurements
+}
+
+func printMesurementStatus(methodName string, increaseCount int) {
+	fmt.Println(string(utils.Yellow) + "[" + methodName + "]:" + string(utils.Reset))
+	fmt.Printf("Measurement increased ")
+	fmt.Printf(string(utils.Green) + strconv.Itoa(increaseCount) + string(utils.Reset))
+	fmt.Printf(" times. \n\n")
+}
+
+func (sonar SonarSweep) CountDepthMesurementIncrease() {
+	file := utils.OpenFile(sonar.Input)
+	defer file.Close()
+
+	sonarMesurements := parseMesurements(file)
+
+	mesurementIncrease := 0
+	var previousMesurement int
+
+	for index := range sonarMesurements {
+		if index != 0 && sonarMesurements[index] > previousMesurement {
+			mesurementIncrease++
+		}
+		previousMesurement = sonarMesurements[index]
+	}
+
+	printMesurementStatus("DEPTH MESUREMENT INCREASE", mesurementIncrease)
+}
+
+func (sonar SonarSweep) ThreeMeasurementsWindow() {
+	file := utils.OpenFile(sonar.Input)
+	defer file.Close()
+
+	sonarMesurement := parseMesurements(file)
 
 	previousSum := 0
 	var increaseTimes int
@@ -52,7 +85,5 @@ func Day1() {
 		}
 	}
 
-	fmt.Printf("Measurement increased ")
-	fmt.Printf(string(aocColor.Green) + strconv.Itoa(increaseTimes) + string(aocColor.Reset))
-	fmt.Printf(" times. \n")
+	printMesurementStatus("THREE SONAR MESUREMENTS WINDOW", increaseTimes)
 }
