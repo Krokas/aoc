@@ -21,4 +21,18 @@ func main() {
 	submarine.Navigate()
 	submarine.BackToStartingPosition()
 	submarine.Steer()
+
+	// Day 3
+	diagnostics := aoc2021.Diagnostics{
+		Input:                 "./2021/input/day3.txt",
+		PowerConsumption:      0,
+		GammaRate:             0,
+		EpsilonRate:           0,
+		OxygenGeneratorRating: 0,
+		Co2ScrubberRating:     0,
+		LifeSupportRating:     0,
+	}
+
+	diagnostics.GetPowerConsumption()
+	diagnostics.GetLifeSupportRating()
 }
