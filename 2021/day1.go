@@ -41,7 +41,7 @@ func printMesurementStatus(methodName string, increaseCount int) {
 	fmt.Printf(" times. \n\n")
 }
 
-func (sonar SonarSweep) CountDepthMesurementIncrease() {
+func (sonar SonarSweep) CountDepthMesurementIncrease() int {
 	file := utils.OpenFile(sonar.Input)
 	defer file.Close()
 
@@ -58,6 +58,7 @@ func (sonar SonarSweep) CountDepthMesurementIncrease() {
 	}
 
 	printMesurementStatus("DEPTH MESUREMENT INCREASE", mesurementIncrease)
+	return mesurementIncrease
 }
 
 func (sonar SonarSweep) ThreeMeasurementsWindow() {

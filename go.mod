@@ -4,8 +4,12 @@ go 1.17
 
 replace aoc/2021 => ./2021
 
+replace aoc/start/2022 => ./2022
+
 replace aoc/utils => ./utils
 
 require aoc/2021 v1.0.0
 
-require aoc/utils v1.0.0 // indirect
+require aoc/start/2022 v1.0.0
+
+require aoc/utils v1.0.0

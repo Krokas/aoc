@@ -1,6 +1,10 @@
 package main
 
-import "aoc/2021"
+import (
+	aoc2021 "aoc/2021"
+	aoc2022 "aoc/start/2022"
+	"aoc/utils"
+)
 
 func main() {
 	// Day 1
@@ -35,4 +39,9 @@ func main() {
 
 	diagnostics.GetPowerConsumption()
 	diagnostics.GetLifeSupportRating()
+
+	// 2022
+	utils.Warn("THIS IS A START TO 2022!")
+	utils.WarnWithValue("This is a test", "nod and we do the rest!")
+	utils.Warn(aoc2022.StartingFunc())
 }
