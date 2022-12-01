@@ -4,6 +4,7 @@ import (
 	aoc2021 "aoc/2021"
 	aoc2022 "aoc/start/2022"
 	"aoc/utils"
+	"bufio"
 )
 
 func main() {
@@ -42,6 +43,20 @@ func main() {
 
 	// 2022
 	utils.Warn("THIS IS A START TO 2022!")
-	utils.WarnWithValue("This is a test", "nod and we do the rest!")
-	utils.Warn(aoc2022.StartingFunc())
+	utils.Warn("DAY 1")
+	file := utils.OpenFile("./2022/input/day1.txt")
+	defer file.Close()
+	
+	caloryListScanner := bufio.NewScanner(file)
+	maxCalories := aoc2022.TotalMostCalories(caloryListScanner)
+	utils.WarnWithIntValue("Top Total Calories by elf", maxCalories)
+
+	file2 := utils.OpenFile("./2022/input/day1.txt")
+	defer file2.Close()
+
+	topThreecaloryListScanner := bufio.NewScanner(file2)
+	topThreeTotalColories := aoc2022.TopThreeTotalMostCalories(topThreecaloryListScanner)
+	utils.WarnWithIntValue("Top Three Total Calories by elf", topThreeTotalColories)
+	
+
 }

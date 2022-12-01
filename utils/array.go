@@ -8,3 +8,31 @@ func IntContains(a []int, x int) bool {
 	}
 	return false
 }
+
+func MinMax(array []int) (int, int) {
+	var max int
+	var min int
+	for _, value := range array {
+		if max < value {
+			max = value
+		}
+		if min > value {
+			min = value
+		}
+	}
+	return min, max
+}
+
+func IndexOf(haystack []int, needle int) int {
+	for i, v := range haystack {
+		if v == needle {
+			return i
+		}
+	}
+	return -1
+}
+
+func RemoveFromArray(slice []int, s int) []int {
+	index := IndexOf(slice, s)
+	return append(slice[:index], slice[index+1:]...)
+}
