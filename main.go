@@ -58,5 +58,18 @@ func main() {
 	topThreeTotalColories := aoc2022.TopThreeTotalMostCalories(topThreecaloryListScanner)
 	utils.WarnWithIntValue("Top Three Total Calories by elf", topThreeTotalColories)
 	
+	utils.Warn("DAY 2")
+	day2Part1File := utils.OpenFile("./2022/input/day2.txt")
+	defer day2Part1File.Close()
 
+	RPCScanner := bufio.NewScanner(day2Part1File)
+	totalRPCScore := aoc2022.CheatingTotalScore(RPCScanner)
+	utils.WarnWithIntValue("Total Rock Paper Scissors Score", totalRPCScore)
+
+	day2Part2File := utils.OpenFile("./2022/input/day2.txt")
+	defer day2Part2File.Close()
+
+	RPCFullStrategyScanner := bufio.NewScanner(day2Part2File)
+	totalRPCFullStrategyScore := aoc2022.UltraTopSecretGuideForCheating(RPCFullStrategyScanner)
+	utils.WarnWithIntValue("Total Rock Paper Scissors: Full Strategy Score", totalRPCFullStrategyScore)
 }
