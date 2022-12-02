@@ -7,7 +7,7 @@ import (
 	"bufio"
 )
 
-func main() {
+func run2021() {
 	// Day 1
 	sonar := aoc2021.SonarSweep{
 		Input: "./2021/input/day1.txt",
@@ -40,8 +40,9 @@ func main() {
 
 	diagnostics.GetPowerConsumption()
 	diagnostics.GetLifeSupportRating()
+}
 
-	// 2022
+func run2022() {
 	utils.Warn("THIS IS A START TO 2022!")
 	utils.Warn("DAY 1")
 	file := utils.OpenFile("./2022/input/day1.txt")
@@ -72,4 +73,8 @@ func main() {
 	RPCFullStrategyScanner := bufio.NewScanner(day2Part2File)
 	totalRPCFullStrategyScore := aoc2022.UltraTopSecretGuideForCheating(RPCFullStrategyScanner)
 	utils.WarnWithIntValue("Total Rock Paper Scissors: Full Strategy Score", totalRPCFullStrategyScore)
+}
+
+func main() {
+	run2022()
 }
