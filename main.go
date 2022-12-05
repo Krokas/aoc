@@ -88,6 +88,21 @@ func run2022() {
 	day3Part2Scanner := bufio.NewScanner(day3Part2File)
 	totalBadgePriority := aoc2022.TotalBadgePriorities(day3Part2Scanner)
 	utils.WarnWithIntValue("Total Priority of Badge Items", totalBadgePriority)
+
+	utils.Warn("DAY 4")
+	day4Part1File := utils.OpenFile("./2022/input/day4.txt")
+	defer day4Part1File.Close()
+
+	day4Part1Scanner := bufio.NewScanner(day4Part1File)
+	totalFullyContainerdPairs := aoc2022.TotalFullyContainedPairs(day4Part1Scanner)
+	utils.WarnWithIntValue("Total Fully contained Payrs", totalFullyContainerdPairs)
+
+	day4Part2File := utils.OpenFile("./2022/input/day4.txt")
+	defer day4Part2File.Close()
+
+	day4Part2Scanner := bufio.NewScanner(day4Part2File)
+	totalOverlapingPairs := aoc2022.TotalOverlapingPairs(day4Part2Scanner)
+	utils.WarnWithIntValue("Total overlaping pairs",  totalOverlapingPairs)
 }
 
 func main() {
