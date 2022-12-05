@@ -73,6 +73,21 @@ func run2022() {
 	RPCFullStrategyScanner := bufio.NewScanner(day2Part2File)
 	totalRPCFullStrategyScore := aoc2022.UltraTopSecretGuideForCheating(RPCFullStrategyScanner)
 	utils.WarnWithIntValue("Total Rock Paper Scissors: Full Strategy Score", totalRPCFullStrategyScore)
+
+	utils.Warn("DAY 3")
+	day3Part1File := utils.OpenFile("./2022/input/day3.txt")
+	defer day3Part1File.Close()
+
+	day3part1Scanner := bufio.NewScanner(day3Part1File)
+	totalPriorityInRucksacks := aoc2022.TotalPrioritizedItemsInRucksacks(day3part1Scanner)
+	utils.WarnWithIntValue("Total Priority of Items by Type in rucksacks", totalPriorityInRucksacks)
+
+	day3Part2File := utils.OpenFile("./2022/input/day3.txt")
+	defer day3Part2File.Close()
+
+	day3Part2Scanner := bufio.NewScanner(day3Part2File)
+	totalBadgePriority := aoc2022.TotalBadgePriorities(day3Part2Scanner)
+	utils.WarnWithIntValue("Total Priority of Badge Items", totalBadgePriority)
 }
 
 func main() {
