@@ -3,6 +3,7 @@ package main
 import (
 	aoc2021 "aoc/2021"
 	aoc2022 "aoc/start/2022"
+	aoc2023 "aoc/start/2023"
 	"aoc/utils"
 	"bufio"
 )
@@ -105,6 +106,22 @@ func run2022() {
 	utils.WarnWithIntValue("Total overlaping pairs",  totalOverlapingPairs)
 }
 
+func run2023() {
+	day1Part1File := utils.OpenFile("./2023/input/day1part1.txt")
+	defer day1Part1File.Close()
+
+	day1Part1Scanner := bufio.NewScanner(day1Part1File)
+	TrebushetCalibrationValuesSum := aoc2023.GetCalibrationValuesSum(day1Part1Scanner)
+	utils.WarnWithIntValue("Trebushet Calibration Value", TrebushetCalibrationValuesSum)
+
+	day1Part2File := utils.OpenFile("./2023/input/day1part2.txt")
+	defer day1Part2File.Close()
+
+	day1Part2Scanner := bufio.NewScanner(day1Part2File)
+	TrebushetSpelledCalibrationValuesSum := aoc2023.GetSpelledCalibrationValuesSum(day1Part2Scanner)
+	utils.WarnWithIntValue("Trebushet Spelled Calibration Value", TrebushetSpelledCalibrationValuesSum)
+}
+
 func main() {
-	run2022()
+	run2023()
 }
