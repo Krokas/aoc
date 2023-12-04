@@ -139,3 +139,12 @@ func run2023() {
 func main() {
 	run2023()
 }
+
+func fileToScanner(filepath string) *bufio.Scanner {
+	file := utils.OpenFile(filepath)
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+
+	return scanner
+}
