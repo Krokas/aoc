@@ -120,6 +120,20 @@ func run2023() {
 	day1Part2Scanner := bufio.NewScanner(day1Part2File)
 	TrebushetSpelledCalibrationValuesSum := aoc2023.GetSpelledCalibrationValuesSum(day1Part2Scanner)
 	utils.WarnWithIntValue("Trebushet Spelled Calibration Value", TrebushetSpelledCalibrationValuesSum)
+
+	day2Part1File := utils.OpenFile("./2023/input/day2part1.txt")
+	defer day2Part1File.Close()
+
+	day2part1Scanner := bufio.NewScanner(day2Part1File)
+	coloredCubeSum := aoc2023.GetSumOfGameIds(day2part1Scanner)
+	utils.WarnWithIntValue("Valid game count", coloredCubeSum)
+
+	day2Part2File := utils.OpenFile("./2023/input/day2part2.txt")
+	defer day2Part2File.Close()
+
+	day2Part2Scanner := bufio.NewScanner(day2Part2File)
+	sumOfPowerGames := aoc2023.GetPowerOfGamesSum(day2Part2Scanner)
+	utils.WarnWithIntValue("Sum of power of games", sumOfPowerGames)
 }
 
 func main() {
