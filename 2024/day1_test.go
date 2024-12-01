@@ -21,3 +21,11 @@ func TestGetDistanceSum(t *testing.T) {
 		t.Errorf("GetDistanceSum = %d, expected 11", got)
 	}
 }
+
+func TestGetSimilarityScore(t *testing.T) {
+	scanner := bufio.NewScanner(strings.NewReader(listSample))
+	got := GetSimilarityScore(scanner)
+	if got != 31 {
+		t.Errorf("GetSimilarityScore = %d, expected 31", got)
+	}
+}

@@ -144,6 +144,13 @@ func run2024() {
 	day1Part1Scanner := bufio.NewScanner(day1Part1File)
 	totalDistance := aoc2024.GetDistanceSum(day1Part1Scanner)
 	utils.WarnWithIntValue("Total distance between list one and list two", totalDistance)
+
+	day1Part2File := utils.OpenFile("./2024/input/day1part2.txt")
+	defer day1Part2File.Close()
+
+	day1Part2Scanner := bufio.NewScanner(day1Part2File)
+	similarityScore := aoc2024.GetSimilarityScore(day1Part2Scanner)
+	utils.WarnWithIntValue("Similarity score", similarityScore)
 }
 
 func main() {
