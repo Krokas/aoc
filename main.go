@@ -136,8 +136,12 @@ func run2023() {
 	utils.WarnWithIntValue("Sum of power of games", sumOfPowerGames)
 }
 
+func run2024() {
+
+}
+
 func main() {
-	run2023()
+	run2024()
 }
 
 func fileToScanner(filepath string) *bufio.Scanner {
