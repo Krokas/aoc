@@ -4,6 +4,7 @@ import (
 	aoc2021 "aoc/2021"
 	aoc2022 "aoc/start/2022"
 	aoc2023 "aoc/start/2023"
+	aoc2024 "aoc/start/2024"
 	"aoc/utils"
 	"bufio"
 )
@@ -137,7 +138,12 @@ func run2023() {
 }
 
 func run2024() {
-	
+	day1Part1File := utils.OpenFile("./2024/input/day1part1.txt")
+	defer day1Part1File.Close()
+
+	day1Part1Scanner := bufio.NewScanner(day1Part1File)
+	totalDistance := aoc2024.GetDistanceSum(day1Part1Scanner)
+	utils.WarnWithIntValue("Total distance between list one and list two", totalDistance)
 }
 
 func main() {
