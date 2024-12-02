@@ -151,6 +151,12 @@ func run2024() {
 	day1Part2Scanner := bufio.NewScanner(day1Part2File)
 	similarityScore := aoc2024.GetSimilarityScore(day1Part2Scanner)
 	utils.WarnWithIntValue("Similarity score", similarityScore)
+
+	day2Part1File := utils.OpenFile("./2024/input/day2part1.txt")
+	defer day2Part1File.Close()
+	day2part1Scanner := bufio.NewScanner(day2Part1File)
+	safeReportCount := aoc2024.GetSafeReportSum(day2part1Scanner)
+	utils.WarnWithIntValue("Safe Report Count", safeReportCount)
 }
 
 func main() {
