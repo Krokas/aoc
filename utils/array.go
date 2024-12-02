@@ -36,3 +36,9 @@ func RemoveFromArray(slice []int, s int) []int {
 	index := IndexOf(slice, s)
 	return append(slice[:index], slice[index+1:]...)
 }
+
+func RemoveFromArrayByKey(slice []int, key int) []int {
+	ret := make([]int, 0)
+	ret = append(ret, slice[:key]...)
+	return append(ret, slice[key+1:]...)
+}

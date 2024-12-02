@@ -1,6 +1,7 @@
 package aoc2024
 
 import (
+	"aoc/utils"
 	"bufio"
 	"strconv"
 	"strings"
@@ -17,6 +18,28 @@ func GetSafeReportSum(scanner *bufio.Scanner) int {
 		line := scanner.Text()
 		report := parseReport(line)
 		report.isSafe = isReportSafe(report)
+		reports = append(reports, report)
+	}
+
+	safeReportCount := 0
+	for i := 0; i < len(reports); i++ {
+		if reports[i].isSafe {
+			safeReportCount++
+		}
+	}
+
+	return safeReportCount
+}
+
+func GetSafeReportWithProblemDampener(scanner *bufio.Scanner) int {
+	var reports []Report
+	for scanner.Scan() {
+		line := scanner.Text()
+		report := parseReport(line)
+		report.isSafe = isReportSafe(report)
+		if !report.isSafe {
+			report.isSafe = isSafeWithProblemDampener(report)
+		}
 		reports = append(reports, report)
 	}
 
@@ -80,6 +103,22 @@ func isReportSafe(report Report) bool {
 
 		if !isSafe {
 			return false
+		}
+	}
+	return isSafe
+}
+
+func isSafeWithProblemDampener(report Report) bool {
+	isSafe := false
+	for i := 0; i < len(report.levels); i++ {
+		var newReport Report
+		levels := utils.RemoveFromArrayByKey(report.levels, i)
+
+		newReport.isSafe = false
+		newReport.levels = levels
+		newReport.isSafe = isReportSafe(newReport)
+		if newReport.isSafe {
+			return true
 		}
 	}
 	return isSafe

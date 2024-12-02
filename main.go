@@ -157,6 +157,12 @@ func run2024() {
 	day2part1Scanner := bufio.NewScanner(day2Part1File)
 	safeReportCount := aoc2024.GetSafeReportSum(day2part1Scanner)
 	utils.WarnWithIntValue("Safe Report Count", safeReportCount)
+
+	day2Part2File := utils.OpenFile("./2024/input/day2part2.txt")
+	defer day2Part2File.Close()
+	day2Part2Scanner := bufio.NewScanner(day2Part2File)
+	safeReportWithProblemDampener := aoc2024.GetSafeReportWithProblemDampener(day2Part2Scanner)
+	utils.WarnWithIntValue("Safe Report with Problem Dampener", safeReportWithProblemDampener)
 }
 
 func main() {

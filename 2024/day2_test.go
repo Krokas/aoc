@@ -20,3 +20,11 @@ func TestGetSafeReportSum(t *testing.T) {
 		t.Errorf("GetSafeReportSum = %d, expected 2", got)
 	}
 }
+
+func TestGetSafeReportWithProblemDampener(t *testing.T) {
+	scanner := bufio.NewScanner(strings.NewReader(reportsSample))
+	got := GetSafeReportWithProblemDampener(scanner)
+	if got != 4 {
+		t.Errorf("GetSafeReportWithProblemDampener = %d, expected 4", got)
+	}
+}
