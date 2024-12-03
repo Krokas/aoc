@@ -169,6 +169,12 @@ func run2024() {
 	day3Part1Scanner := bufio.NewScanner(day3Part1File)
 	corruptedMemorySum := aoc2024.GetSumOfMultipiedCorruptedMemory(day3Part1Scanner)
 	utils.WarnWithIntValue("Corrupted Memory Sum", corruptedMemorySum)
+
+	day3Part2File := utils.OpenFile("./2024/input/day3part2.txt")
+	defer day3Part2File.Close()
+	day3Part2Scanner := bufio.NewScanner(day3Part2File)
+	corruptedMemoryDisableableSum := aoc2024.GetSumofDisableableMultipieldCorruptedMemory(day3Part2Scanner)
+	utils.WarnWithIntValue("Disableable Corrupted Memory Sum", corruptedMemoryDisableableSum)
 }
 
 func main() {
