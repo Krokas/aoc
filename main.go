@@ -175,6 +175,12 @@ func run2024() {
 	day3Part2Scanner := bufio.NewScanner(day3Part2File)
 	corruptedMemoryDisableableSum := aoc2024.GetSumofDisableableMultipieldCorruptedMemory(day3Part2Scanner)
 	utils.WarnWithIntValue("Disableable Corrupted Memory Sum", corruptedMemoryDisableableSum)
+
+	day4part1File := utils.OpenFile("./2024/input/day4part1.txt")
+	defer day4part1File.Close()
+	day4Part1Scanner := bufio.NewScanner(day4part1File)
+	SumWordSearch := aoc2024.GetSumOfWordOccuranceInWordSearch(day4Part1Scanner)
+	utils.WarnWithIntValue("Word search sum", SumWordSearch)
 }
 
 func main() {
