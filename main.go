@@ -187,6 +187,12 @@ func run2024() {
 	day4Part2Scanner := bufio.NewScanner(day4Part2File)
 	XMASCount := aoc2024.GetSumOfXCrossedWords(day4Part2Scanner)
 	utils.WarnWithIntValue("X-MAS count", XMASCount)
+
+	day5Part1File := utils.OpenFile("./2024/input/day5part1.txt")
+	defer day5Part1File.Close()
+	day5Part1Scanner := bufio.NewScanner(day5Part1File)
+	MiddlePageNumberSum := aoc2024.GetSumOfMiddlePageNumbers(day5Part1Scanner)
+	utils.WarnWithIntValue("Sum of Middle page number", MiddlePageNumberSum)
 }
 
 func main() {
