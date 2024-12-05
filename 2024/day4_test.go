@@ -24,3 +24,11 @@ func TestGetSumOfWordOccuranceInWordSearch(t *testing.T) {
 		t.Errorf("GetSumOfWordOccuranceInWordSearch = %d, expected 18", got)
 	}
 }
+
+func TestGetSumOfXCrossedWords(t *testing.T) {
+	scanner := bufio.NewScanner(strings.NewReader(wordSearchSample))
+	got := GetSumOfXCrossedWords(scanner)
+	if got != 9 {
+		t.Errorf("GetSumOfXCrossedWords = %d, expected 9", got)
+	}
+}

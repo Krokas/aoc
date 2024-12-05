@@ -2,6 +2,7 @@ package aoc2024
 
 import (
 	"bufio"
+	"fmt"
 	"strings"
 )
 
@@ -54,6 +55,80 @@ func GetSumOfWordOccuranceInWordSearch(scanner *bufio.Scanner) int {
 			}
 		}
 		
+	}
+
+	return occuranceCount
+}
+
+func GetSumOfXCrossedWords(scanner *bufio.Scanner) int {
+	var wordSearch []string
+	var lineWidth int
+	for scanner.Scan() {
+		line := scanner.Text()
+		if len(line) > 0 {
+			chars := strings.Split(line, "")
+			wordSearch = append(wordSearch, chars...)
+
+			lineWidth = len(chars)
+		}
+	}
+	occuranceCount := 0
+	var foundOccurances []WordOccurance 
+	for i := 0; i < len(wordSearch); i++ {
+		// retest
+		for r := 0; r < 8; r++ {
+
+			occurance := findWordOccurance("MAS", i, wordSearch, lineWidth, r)
+			if occurance.found {
+				if !isOccuranceFound(occurance, foundOccurances) {
+					foundOccurances = append(foundOccurances, occurance)
+				}
+			}
+		}
+		
+	}
+
+	var xPossible []WordOccurance
+
+	for i := 0; i < len(foundOccurances); i++ {
+		oc := foundOccurances[i]
+		if oc.oreantation == TOP_LEFT || oc.oreantation == TOP_RIGHT || oc.oreantation == BOTTOM_LEFT || oc.oreantation == BOTTOM_RIGHT {
+			xPossible = append(xPossible, oc)
+			if oc.position.x == 7 && oc.position.y == 1 {
+				fmt.Println(oc)
+			}
+		}
+	}
+
+	for a := 0; a < len(xPossible); a++ {
+		for b := 0; b < len(xPossible); b++ {
+			occA := xPossible[a]
+			occB := xPossible[b]
+
+			// from the bottom - 5
+			if occB.position.x + 2 == occA.position.x  && occB.position.y == occA.position.y && occB.oreantation == TOP_RIGHT && occA.oreantation == TOP_LEFT {
+				occuranceCount++
+			}
+
+			// from the top - 1
+			if occB.position.x + 2 == occA.position.x && occB.position.y == occA.position.y && occB.oreantation == BOTTOM_RIGHT && occA.oreantation == BOTTOM_LEFT {
+				occuranceCount++
+			}
+
+			// if occB.position.x == 5 && occB.position.y == 1 && occA.oreantation == BOTTOM_LEFT {
+			// 	fmt.Println("occA", occA, occB.oreantation)
+			// }
+
+			// from the left 2
+			if occB.position.y == occA.position.y + 2 && occB.position.x == occA.position.x && occB.oreantation == TOP_RIGHT && occA.oreantation == BOTTOM_RIGHT {
+				occuranceCount++
+			}
+
+			// from the right 2 (1 radau)
+			if occB.position.y == occA.position.y + 2 && occB.position.x == occA.position.x && occB.oreantation == TOP_LEFT && occA.oreantation == BOTTOM_LEFT {
+				occuranceCount++
+			}
+		}
 	}
 
 	return occuranceCount
