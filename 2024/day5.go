@@ -39,6 +39,67 @@ func GetSumOfMiddlePageNumbers(scanner *bufio.Scanner) int {
 	return sumOfMiddlePageNumber
 }
 
+func GetSumOfIncorrectlyOrderedUpdateMiddlePages(scanner *bufio.Scanner) int {
+
+	printingManual := generatePrintingManual(scanner)
+
+	for i := 0; i < len(printingManual.updates); i++ {
+		printingManual.updates[i].inOrder = isUpdateInOrder(printingManual.updates[i], printingManual.rules)
+	}
+
+	
+	sumOfMiddlePageNumber := 0
+	for _, update := range printingManual.updates {
+		if !update.inOrder {
+			reorderedUpdate := reorderUpdate(update, printingManual.rules)
+			reorderedUpdate.inOrder = isUpdateInOrder(reorderedUpdate, printingManual.rules)
+			if !reorderedUpdate.inOrder {
+				for i := 0; i < len(printingManual.rules) * len(reorderedUpdate.updates); i++ {
+					if !isUpdateInOrder(reorderedUpdate, printingManual.rules) {
+						reorderedUpdate = reorderUpdate(reorderedUpdate, printingManual.rules)
+					} else {
+						reorderedUpdate.inOrder = isUpdateInOrder(reorderedUpdate, printingManual.rules)
+						sumOfMiddlePageNumber += getMiddlePageNumber(reorderedUpdate)
+						break
+					}
+				}
+			} else {
+				sumOfMiddlePageNumber += getMiddlePageNumber(reorderedUpdate)
+			}
+		}
+	}
+
+	return sumOfMiddlePageNumber
+}
+
+func reorderUpdate(update PrintingUpdate, rules []PrintingRule) PrintingUpdate {
+	for _, rule := range rules {
+		firstIndex := -1
+		secondIndex := -1
+
+
+		for index, pageNumber := range update.updates {
+			if rule.first == pageNumber {
+				firstIndex = index
+			}
+
+			if rule.second == pageNumber {
+				secondIndex = index
+			}
+		}
+
+		if firstIndex == -1 || secondIndex == -1 {
+			continue
+		}
+
+		if firstIndex > secondIndex {
+			update.updates[firstIndex], update.updates[secondIndex] = update.updates[secondIndex], update.updates[firstIndex]
+		}
+	}
+
+	return update
+}
+
 func generatePrintingManual(scanner *bufio.Scanner) PrintingManual {
 	var printingManual PrintingManual
 	for scanner.Scan() {

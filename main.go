@@ -193,6 +193,12 @@ func run2024() {
 	day5Part1Scanner := bufio.NewScanner(day5Part1File)
 	MiddlePageNumberSum := aoc2024.GetSumOfMiddlePageNumbers(day5Part1Scanner)
 	utils.WarnWithIntValue("Sum of Middle page number", MiddlePageNumberSum)
+
+	day5Part2File := utils.OpenFile("./2024/input/day5part2.txt")
+	defer day5Part2File.Close()
+	day5Part2Scanner := bufio.NewScanner(day5Part2File)
+	MiddlePageNumberIncorrectOrder := aoc2024.GetSumOfIncorrectlyOrderedUpdateMiddlePages(day5Part2Scanner)
+	utils.WarnWithIntValue("Incorrectly ordered pages middle page number", MiddlePageNumberIncorrectOrder)
 }
 
 func main() {

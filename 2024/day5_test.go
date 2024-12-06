@@ -42,3 +42,11 @@ func TestGetSumOfMiddlePageNumbers(t *testing.T) {
 		t.Errorf("GetSumOfMiddlePageNumbers = %d, expected 143", got)
 	}
 }
+
+func TestGetSumOfIncorrectlyOrderedUpdateMiddlePages(t *testing.T) {
+	scanner := bufio.NewScanner(strings.NewReader(printingManualSample))
+	got := GetSumOfIncorrectlyOrderedUpdateMiddlePages(scanner)
+	if got != 123 {
+		t.Errorf("GetSumOfIncorrectlyOrderedUpdateMiddlePages = %d, expected 123", got)
+	}
+}
