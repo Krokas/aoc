@@ -199,6 +199,12 @@ func run2024() {
 	day5Part2Scanner := bufio.NewScanner(day5Part2File)
 	MiddlePageNumberIncorrectOrder := aoc2024.GetSumOfIncorrectlyOrderedUpdateMiddlePages(day5Part2Scanner)
 	utils.WarnWithIntValue("Incorrectly ordered pages middle page number", MiddlePageNumberIncorrectOrder)
+
+	day6Part1File := utils.OpenFile("./2024/input/day6part1.txt")
+	defer day6Part1File.Close()
+	day6Part1Scanner := bufio.NewScanner(day6Part1File)
+	PlacesVisitedByGuard := aoc2024.GetGuardVisitedAreaCount(day6Part1Scanner)
+	utils.WarnWithIntValue("Guard visited number of areas before leaving", PlacesVisitedByGuard)
 }
 
 func main() {
