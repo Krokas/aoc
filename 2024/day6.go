@@ -3,12 +3,15 @@ package aoc2024
 import (
 	"aoc/utils"
 	"bufio"
+	"encoding/json"
+	"fmt"
 )
 
 const (
 	EMPTY = 0
 	OBSTICLE = 1
 	GUARD = 2
+	MY_OBSTICLE = 3
 )
 
 type Guard struct {
@@ -47,6 +50,71 @@ func GetGuardVisitedAreaCount(scanner *bufio.Scanner) int {
 		}
 	}
 	return len(path)
+}
+
+func GetPossibleGuardLoopCount(scanner *bufio.Scanner) int {
+	mapData := readMap(scanner)
+
+	guard := generateGuard(mapData)
+	direction := guard.direction
+	posX := guard.position.x
+	posY := guard.position.y
+	var path []int
+	var visited int
+	isAboutToExit := false
+	for i := 0; i < mapData.width * mapData.height; i++ {
+		visited, isAboutToExit = findPathToExit(mapData, &guard)
+		if visited > -1 && !isAboutToExit && !utils.IntContains(path, visited) {
+			path = append(path, visited)
+		}
+		if isAboutToExit {
+			path = append(path, visited)
+			break
+		}
+	}
+
+	// fmt.Println(mapData, path)
+	loopCount := 0
+	for index := 0; index < len(path) * len(path); index++ {
+		guard.direction = direction
+		guard.position.x = posX
+		guard.position.y = posY
+		guardPosition := guard.position.y * mapData.width + guard.position.x
+		if guardPosition != index {
+			originalValue := mapData.data[index]
+			if mapData.data[index] == OBSTICLE {
+				continue
+			}
+			mapData.data[index] = MY_OBSTICLE
+			// fmt.Println(mapData.data)
+			timesHitMyObsitcle := 0
+			for j := 0; j < mapData.width * mapData.height; j++ {
+				visited, isAboutToExit = findPathToExit(mapData, &guard)
+				if isAboutToExit {
+					mapData.data[index] = originalValue
+					break
+				}
+				if visited == -2 {
+					timesHitMyObsitcle++
+					if timesHitMyObsitcle == 2 {
+						loopCount++
+						mapData.data[index] = originalValue
+						break
+					}
+				}
+
+
+			}
+			
+			mapData.data[index] = originalValue
+		}
+		if index == mapData.width * mapData.height - 1 {
+			break
+		}
+		fmt.Println("Loop Count:", loopCount)
+	}
+	// fmt.Println(mapData)
+	return loopCount
 }
 
 func readMap(scanner *bufio.Scanner) AreaMap {
@@ -189,14 +257,33 @@ func traverse(guard *Guard, position Position, twoDmap []Object, width int, heig
 			visited = guard.position.y * width + guard.position.x
 			isAboutToExit = false
 			guard.position = position
-		} else if object.objType == OBSTICLE {
+		} else if object.objType == OBSTICLE || object.objType == MY_OBSTICLE {
 			guard.direction = getNextDirection(guard.direction)
 			isAboutToExit = false
 			visited = -1
+			if object.objType == MY_OBSTICLE {
+				visited = -2
+			}
 		}
 	} else {
 		isAboutToExit = true
 		visited = guard.position.y * width + guard.position.x
 	}
 	return visited, isAboutToExit
+}
+
+
+
+func cloneMyStruct(orig *AreaMap) (AreaMap, error) {
+	origJSON, err := json.Marshal(orig)
+    clone := AreaMap{}
+	if err != nil {
+		return clone, err
+	}
+
+	if err = json.Unmarshal(origJSON, &clone); err != nil {
+		return clone, err
+	}
+
+	return clone, nil
 }

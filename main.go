@@ -205,6 +205,12 @@ func run2024() {
 	day6Part1Scanner := bufio.NewScanner(day6Part1File)
 	PlacesVisitedByGuard := aoc2024.GetGuardVisitedAreaCount(day6Part1Scanner)
 	utils.WarnWithIntValue("Guard visited number of areas before leaving", PlacesVisitedByGuard)
+
+	day6Part2File := utils.OpenFile("./2024/input/day6part2.txt")
+	defer day6Part2File.Close()
+	day6Part2Scanner := bufio.NewScanner(day6Part2File)
+	NumberOfLoops := aoc2024.GetPossibleGuardLoopCount(day6Part2Scanner)
+	utils.WarnWithIntValue("Guard number of loops", NumberOfLoops)
 }
 
 func main() {
