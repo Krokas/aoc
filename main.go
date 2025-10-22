@@ -7,6 +7,10 @@ import (
 	aoc2024 "aoc/start/2024"
 	"aoc/utils"
 	"bufio"
+	"fmt"
+	"os"
+
+	tea "github.com/charmbracelet/bubbletea"
 )
 
 func run2021() {
@@ -49,7 +53,7 @@ func run2022() {
 	utils.Warn("DAY 1")
 	file := utils.OpenFile("./2022/input/day1.txt")
 	defer file.Close()
-	
+
 	caloryListScanner := bufio.NewScanner(file)
 	maxCalories := aoc2022.TotalMostCalories(caloryListScanner)
 	utils.WarnWithIntValue("Top Total Calories by elf", maxCalories)
@@ -60,7 +64,7 @@ func run2022() {
 	topThreecaloryListScanner := bufio.NewScanner(file2)
 	topThreeTotalColories := aoc2022.TopThreeTotalMostCalories(topThreecaloryListScanner)
 	utils.WarnWithIntValue("Top Three Total Calories by elf", topThreeTotalColories)
-	
+
 	utils.Warn("DAY 2")
 	day2Part1File := utils.OpenFile("./2022/input/day2.txt")
 	defer day2Part1File.Close()
@@ -104,7 +108,7 @@ func run2022() {
 
 	day4Part2Scanner := bufio.NewScanner(day4Part2File)
 	totalOverlapingPairs := aoc2022.TotalOverlapingPairs(day4Part2Scanner)
-	utils.WarnWithIntValue("Total overlaping pairs",  totalOverlapingPairs)
+	utils.WarnWithIntValue("Total overlaping pairs", totalOverlapingPairs)
 }
 
 func run2023() {
@@ -214,7 +218,11 @@ func run2024() {
 }
 
 func main() {
-	run2024()
+	p := tea.NewProgram(initialModel())
+	if _, err := p.Run(); err != nil {
+		fmt.Printf("Alas, there's been an error: %v", err)
+		os.Exit(1)
+	}
 }
 
 func fileToScanner(filepath string) *bufio.Scanner {
