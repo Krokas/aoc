@@ -12,10 +12,10 @@ type model struct {
 	selected map[int]struct{} // which to-do items are selected
 }
 
-func initialModel() model {
+func initialModel(choices []string) model {
 	return model{
 		// Our to-do list is a grocery list
-		choices: []string{"Buy carrots", "Buy celery", "Buy kohlrabi"},
+		choices: choices,
 
 		// A map which indicates which choices are selected. We're using
 		// the  map like a mathematical set. The keys refer to the indexes

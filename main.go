@@ -8,7 +8,9 @@ import (
 	"aoc/utils"
 	"bufio"
 	"fmt"
+	"log"
 	"os"
+	"strconv"
 
 	tea "github.com/charmbracelet/bubbletea"
 )
@@ -218,7 +220,22 @@ func run2024() {
 }
 
 func main() {
-	p := tea.NewProgram(initialModel())
+	var years []string
+
+	entries, err := os.ReadDir("./")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	for _, e := range entries {
+		_, err = strconv.Atoi(e.Name())
+
+		if err == nil {
+			years = append(years, e.Name())
+		}
+	}
+
+	p := tea.NewProgram(initialModel(years))
 	if _, err := p.Run(); err != nil {
 		fmt.Printf("Alas, there's been an error: %v", err)
 		os.Exit(1)
