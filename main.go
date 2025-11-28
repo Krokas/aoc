@@ -220,7 +220,7 @@ func run2024() {
 }
 
 func main() {
-	var years []string
+	var years []Item
 
 	entries, err := os.ReadDir("./")
 	if err != nil {
@@ -231,7 +231,9 @@ func main() {
 		_, err = strconv.Atoi(e.Name())
 
 		if err == nil {
-			years = append(years, e.Name())
+			// TODO: add sepcific description for each year.
+			year := Item{title: e.Name(), desc: ""}
+			years = append(years, year)
 		}
 	}
 
