@@ -12,6 +12,7 @@ import (
 	"os"
 	"strconv"
 
+	"github.com/charmbracelet/bubbles/list"
 	tea "github.com/charmbracelet/bubbletea"
 )
 
@@ -219,8 +220,8 @@ func run2024() {
 	utils.WarnWithIntValue("Guard number of loops", NumberOfLoops)
 }
 
-func main() {
-	var years []Item
+func initialList() []list.Item {
+	var years []utils.Item
 
 	entries, err := os.ReadDir("./")
 	if err != nil {
@@ -232,12 +233,23 @@ func main() {
 
 		if err == nil {
 			// TODO: add sepcific description for each year.
-			year := Item{title: e.Name(), desc: ""}
+			year := utils.Item{TitleValue: e.Name(), Desc: ""}
 			years = append(years, year)
 		}
 	}
 
-	p := tea.NewProgram(initialModel(years))
+	finalList := []list.Item{}
+
+	for _, value := range years {
+		finalList = append(finalList, value)
+	}
+
+	return finalList
+}
+
+func main() {
+
+	p := tea.NewProgram(initialModel(initialList()))
 	if _, err := p.Run(); err != nil {
 		fmt.Printf("Alas, there's been an error: %v", err)
 		os.Exit(1)
@@ -251,4 +263,13 @@ func fileToScanner(filepath string) *bufio.Scanner {
 	scanner := bufio.NewScanner(file)
 
 	return scanner
+}
+
+func execute(yearCursor int, cursor int) int {
+	switch yearCursor {
+	case 0:
+		return aoc2021.Execute(cursor)
+	default:
+		return 0
+	}
 }

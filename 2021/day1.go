@@ -57,7 +57,7 @@ func (sonar SonarSweep) CountDepthMesurementIncrease() int {
 		previousMesurement = sonarMesurements[index]
 	}
 
-	printMesurementStatus("DEPTH MESUREMENT INCREASE", mesurementIncrease)
+	//printMesurementStatus("DEPTH MESUREMENT INCREASE", mesurementIncrease)
 	return mesurementIncrease
 }
 
